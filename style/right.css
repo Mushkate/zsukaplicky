@@ -1,0 +1,7 @@
+
+.right {
+  background: #ffff88;
+  width: var(--right-size);   
+  float: right;
+  height: 100%;     
+}

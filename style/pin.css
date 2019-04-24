@@ -1,0 +1,32 @@
+.pin h2 {
+  color: #111181;
+  width: 100%;
+  background-color: #99bbdd;   
+  margin: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.pin {
+    width: 80%;
+    background: lightblue;
+    margin: 0;
+    margin-left: 9%;
+    padding-bottom: 10px;
+}
+
+.pin ul {
+  margin: 10px;
+}
+
+.pin table {
+  border: none; 
+  }
+
+.pin table td {
+  border: none;
+  vertical-align: top;
+  padding: 5px;
+}

@@ -1,0 +1,11 @@
+.mid {
+  height: 100%;
+  width: 100%;
+  padding: 10px;      
+  background: url("../images/mid_but_op.jpg"); 
+  background-position: right bottom;   
+  background-size: 70% auto;         
+  background-repeat: no-repeat;  
+  overflow-y: scroll;
+}
+
