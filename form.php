@@ -5,40 +5,50 @@
 
 <h3> Vyberte kategorii, pro kterou chcete vložit aktualizaci: </h3>
 
-<table> <tr> <td>
-  <div class="mainselection" onchange="mainSelected()">
-    <select id="mainSelect">
-      <option value="nothing">Vyberte kategorii</option>
-      <option value="volvo">O nás</option>
-      <option value="saab">Zaměstnanci</option>
-      <option value="fiat">Poradenské pracoviště</option>
-    </select>
-  </div>
-  </td><td>
-    <div id="divMinor" class="hidden mainselection" onchange="minorSelected()">
-      <select id="minorSelect" >
-      <option value="volvo">O nás</option>
-      <option value="saab">Zaměstnanci</option>
-      <option value="fiat">Poradenské pracoviště</option>
+<form id="folderForm" action="upload/upload.php" method="post"  enctype="multipart/form-data">
+  <table> <tr> <td>
+    <div class="mainselection" onchange="mainSelected()">
+
+      <select id="mainSelect" name="mainSelect">
+        <option value="nothing">Vyberte kategorii</option>
+        <option value="OSkole">O Škole</option>
+        <option value="ProZaky">Pro Žáky</option>
+        <option value="ProRodice">Pro Rodiče</option>
+        <option value="ZakovskaKnizka">Žákovská Knížka</option>
+        <option value="Aktuality">Aktuality</option>
       </select>
     </div>
-  </td><td>
-    <div id="divFileType" class="hidden mainselection" onchange="filetypeChosen()">
-      <select id="fileType">
-      <option value="pdf"> PDF</option>
-      <option value="word"> Word - web application</option>
-    </div> 
-  </td>
-  </tr>
+    </td><td>
+      <div id="divMinor" class="hidden mainselection" onchange="minorSelected()">
+        <select id="minorSelect" name="minorSelect" >
+        </select>
+      </div>
+    </td><td>
+      <div id="divFileType" class="hidden mainselection" onchange="filetypeChosen()">
+        <select id="fileType" name="fileType">
+        <option value="pdf"> PDF</option>
+        <option value="word"> Word - web application</option>
+      </div> 
+    </td>
+    </tr>
   </table>
-    <form id="pdfForm" action="upload/uploadPdf.php" method="post" enctype="multipart/form-data" class="hidden">
-      <label for="pdfFile" class="btn">Nahrajte PDF soubor: </label>
-      <input type="file" name="pdfFile" id="pdfFile">
-      <input type="submit">
-    </form>
+  <div style="height: 10px">
+  </div>
 
-    <form id="folderForm" action="uploadFolder.php" method="post" enctype="multipart/form-data" class="hidden">
-      <label for="folder" class="btn">Nahrajte složku: </label>
-      <input type="file" id="folder" webkitdirectory mozdirectory />
-      <input type="submit">
-    </form>
+  <div id="title" class="hidden">
+    <label for="pdfFile" class="btn">Nahrajte PDF soubor: </label>
+    <input type="file" name="pdfFile" id="pdfFile" onChange="showButton()">
+  </div>
+  
+  <div id="pdf" class="hidden" >
+    <label for="pdfFile" class="btn">Nahrajte PDF soubor: </label>
+    <input type="file" name="pdfFile" id="pdfFile" onChange="showButton()">
+  </div>
+
+  <div id="word" class="hidden" >
+    <label for="folder" class="btn">Nahrajte složku: </label>
+    <input type="file" name="files[]" id="files" multiple="" directory="" webkitdirectory="" mozdirectory="" onChange="showButton()" >
+  </div>
+      
+  <input id="submitButton" type="submit" value="Submit the form" class="hidden"/>
+</form>

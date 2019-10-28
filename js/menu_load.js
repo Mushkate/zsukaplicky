@@ -1,7 +1,14 @@
- function loadPageJs(id){
- if(id == 'onas' ){
-   $('#mid').load('menu/onas.php');
- } else {
-  $('#mainPanel').load('menu/' + id + '.html');
-  }
- }
+function loadPageJs(major, minor){
+  console.log("loading page fragment. major: " + major + " minor: " + minor);
+
+  $.ajax({
+    url: 'content/' + major + '/' + minor + '.htm',
+    beforeSend: function( xhr ) {
+      xhr.overrideMimeType( "text/plain; charset=windows-1250" );
+    }
+  })
+    .done(function( data ) {
+      $('#mid').html(data);
+    });
+
+}
