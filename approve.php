@@ -17,6 +17,7 @@
       if(isset($_POST['submit'])){
         $username = $_POST['username']; $password = $_POST['password'];
         if($username === 'admin' && $password === 'MameRadiDeti2019'){
+          session_start();
           $_SESSION['login'] = true; 
           echo '<style type="text/css">
         #logform {

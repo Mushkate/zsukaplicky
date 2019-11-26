@@ -1,7 +1,7 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
 
-function uploadPdf($major, $minor) {
+function uploadPdf($newfolder, $newindex) {
     $info = pathinfo($_FILES['pdfFile']['name']);
     $ext = $info['extension']; // get the extension of the file
     
@@ -10,15 +10,13 @@ function uploadPdf($major, $minor) {
         return false;
     }
 
-    $target_pdf = "../content/".$major."/".$minor.".".$ext;
-    $target_htm = "../content/".$major."/".$minor.".htm";
-    if(!file_exists(dirname($target_pdf))) {
-        mkdir(dirname($target_pdf), 0777, true);
-    }
+    $target_pdf = $newfolder."/".$newindex.".pdf";
+    $target_htm = $newfolder."/".$newindex.".htm";
+
     move_uploaded_file( $_FILES['pdfFile']['tmp_name'], $target_pdf);
     $newFile = fopen($target_htm, "w");
-    $content = '<object data="content/'.$major.'/'.$minor.'.pdf" type="application/pdf" width="100%" height="100%">
-    alt : <a href="data/test.pdf">test.pdf</a>
+    $content = '<object data="content/'.$newfolder."/".$newindex.'.pdf" type="application/pdf" width="100%" height="100%">
+    alt : <a href="'.$newfolder."/".$newindex.'.php">PDF for you</a>
     </object>';
     fwrite($newFile, $content);
     fclose($newFile);
@@ -61,66 +59,104 @@ function uploadWord($major, $minor) {
     }
 }
 
-function removeOld($major, $minor) {
-    $path = '../content/'.$major."/".$minor;
-    $old = glob($path.".*");    
-    echo sizeof($old);
-    if (sizeof($old) == 0){
-        return;
-    }
-    $old = current($old); // only one file should be present
+$option = isset($_POST['insertMainSelect']) ? $_POST['insertMainSelect'] : false;
+if ($option) {
+    $major = htmlentities($_POST['insertMainSelect'], ENT_QUOTES, "UTF-8");
+} else {
+    echo "main option is required\n";
+}
 
-    if (substr($old, -4) === ".htm"){
-        $dir=$path.'_soubory';
-        $files = glob($dir."/*"); // get all file names
-        foreach($files as $file){ // iterate files
-            if(is_file($file))
-                unlink($file); // delete file
-        }
-        rmdir($dir);
-        unlink($path.".htm");
-    } else {
-        unlink($path.".pdf");
-        unlink($path.".htm");
-    }
+$option = isset($_POST['insertMinorSelect']) ? $_POST['insertMinorSelect'] : false;
+if ($option) {
+    $minor = htmlentities($_POST['insertMinorSelect'], ENT_QUOTES, "UTF-8");
+} else {
+    echo "minor option is required";
+}
+
+$option = isset($_POST['fileType']) ? $_POST['fileType'] : false;
+if ($option) {
+    $filetype = htmlentities($_POST['fileType'], ENT_QUOTES, "UTF-8");
+} else {
+    echo "fileType option is required";
+}
+
+$option = isset($_POST['title']) ? $_POST['title'] : false;
+if ($option) {
+    $title = htmlentities($_POST['title'], ENT_QUOTES, "UTF-8");
+    echo $title;
+} else {
+    echo "title must be inserted";
 }
 
 
-    $option = isset($_POST['mainSelect']) ? $_POST['mainSelect'] : false;
-    if ($option) {
-        $major = htmlentities($_POST['mainSelect'], ENT_QUOTES, "UTF-8");
-    } else {
-        echo "main option is required\n";
-    }
-    
-    $option = isset($_POST['minorSelect']) ? $_POST['minorSelect'] : false;
-    if ($option) {
-        $minor = htmlentities($_POST['minorSelect'], ENT_QUOTES, "UTF-8");
-    } else {
-        echo "minor option is required";
-    }
+// --- CREATE SIGNPOST IN SPECIFIED FOLDER ---
+$signpost = "../content/".$major."/".$minor."/".$minor.".txt";
 
-    $option = isset($_POST['fileType']) ? $_POST['fileType'] : false;
-    if ($option) {
-        $filetype = htmlentities($_POST['fileType'], ENT_QUOTES, "UTF-8");
-    } else {
-        echo "fileType option is required";
+if(!file_exists(dirname($signpost))) {
+    mkdir(dirname($signpost), 0777, true);
+}
+
+if(!file_exists($signpost)){
+    $handle = @fopen($signpost, "w+");
+    fwrite($handle, "1\n");
+    fwrite($handle, "1_".$title); //the author should be added to the last column
+    $newindex=intval("1");
+} else {
+    $handle = @fopen($signpost, "r");
+    $index = intval(fgets($handle));
+    $newindex = ($index+1);
+    fclose($handle);
+    $handle = @fopen($signpost, "a");
+    fwrite($handle, "\n".($newindex)."_".$title);
+
+    $lines = file($signpost, FILE_IGNORE_NEW_LINES);
+    $lines[0] = ($newindex);
+    file_put_contents($signpost , implode("\n", $lines));
+}
+
+fclose($handle);
+
+// --- CREATE A DIR FOR UPLOADED FILES AND UPLOAD FILES
+$newfolder=dirname($signpost)."/".$newindex."/";
+echo "\nCreating dir for files storing: ".$newfolder."\n";
+mkdir($newfolder, 0777, true);
+echo "After mkdir\n";
+
+if ($filetype == "pdf") {
+    if (uploadPdf($newfolder, $newindex)){
+        echo "<img src=\"../images/green-tick.png\" style=\"height: 20px\"></img>Soubor byl nahrán.";
     }
-    
-    removeOld($major, $minor);
+} else {
+    uploadWord($newfolder, $newindex);
+    echo "<img src=\"../images/green-tick.png\" style=\"height: 20px\"></img>Soubory byly nahrány.";
+}
 
-    if ($filetype == "pdf") {
-        if (uploadPdf($major, $minor)){
-            echo "<img src=\"../images/green-tick.png\" style=\"height: 20px\"></img>Soubor byl aktualizován.";
-        }
-    } else {
-        uploadWord($major, $minor);
-        echo "<img src=\"../images/green-tick.png\" style=\"height: 20px\"></img>Soubory byly aktualizovány.";
+echo "<br><br>";
+echo "<input type='submit' value='Domů'onclick=\"window.location='../../index.php';\" />  ";
+echo "<input type='submit' value='Nahrát další článek'onclick=\"window.location='../../approve.php';\" />";
+
+// --- REFRESH SIGHNPOST HTML FILE
+
+$signpost_html = "../content/".$major."/".$minor."/".$minor.".htm";
+if(!file_exists(dirname($signpost_html))) {
+    mkdir(dirname($signpost_html), 0777, true);
+}
+
+$handle_htm = @fopen($signpost_html, "w+");
+$handle_txt= @fopen($signpost, "r");
+$start = true;
+$content = "<h3> Rozcestník </h3><br><br>";
+while (($line = fgets($handle_txt)) !== false) {
+    if ($start == true) {
+        $start = false;
+        continue;
     }
+    $Data = str_getcsv($line, "_");
+    echo $Data[1];
+    $content = $content.'<a  href="#" onclick="loadArticleJS(\''.$major.'\',\''.$minor.'\',\''.$Data[0].'\')">'.$Data[1].'</a><br>';    
+}
+echo $content;
+fwrite($handle_htm, $content);
+fclose($handle_htm);
 
-    echo "<br><br>";
-    echo "<input type='submit' value='Domů'onclick=\"window.location='../../index.php';\" />  ";
-    echo "<input type='submit' value='Nahrát další článek'onclick=\"window.location='../../form.php';\" />";
-
-    
 ?>
