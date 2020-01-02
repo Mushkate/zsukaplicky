@@ -3,6 +3,7 @@ function loadPageJs(major, minor){
 
   $.ajax({
     url: 'content/' + major + '/' + minor + '/' + minor + '.htm',
+    cache: false,
     beforeSend: function( xhr ) {
       //xhr.overrideMimeType( "text/plain; charset=windows-1250" );
       xhr.overrideMimeType( "text/plain; charset=UTF-8" );
@@ -11,6 +12,7 @@ function loadPageJs(major, minor){
     .done(function( data ) {
       console.log(data);
       $('#mid').html(data);
+      console.log("cache: false");
     });
 
 }

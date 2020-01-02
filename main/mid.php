@@ -9,7 +9,7 @@
 </div>
 
 <script>
-var myIndex = 0;
+var myIndex = 1;
 carousel();
 
 function carousel() {
