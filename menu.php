@@ -25,7 +25,7 @@
       </li>                       
       <li><a href="products.html">PRO RODIČE<i class="fa fa-caret-down fa-fw" aria-hidden="true"></i></a>
         <ul>
-          <li><a href="#" onclick="loadPageJs('ProRodice', 'SkonliRok')">Školní rok 2019/2020</a></li>
+          <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniRok')">Školní rok 2019/2020</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'Informace')">Informace</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniJidelna')">Školní jídelna</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniDruzina')">Školní družina</a></li>
@@ -33,7 +33,7 @@
         </ul>        
       <li><a href="contact.html">FOTOGALERIE </a></li>      
       <li><a href="contact.html">ŽÁKOVSKÁ KNÍŽKA</a></li> 
-      <li><a href="contact.html">AKTUALITY</a></li>
+      <li><a href="actuality.php?page=1">AKTUALITY</a></li>
     </ul>
   </nav>
 </div>

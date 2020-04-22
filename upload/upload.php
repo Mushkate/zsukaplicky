@@ -83,7 +83,6 @@ if ($option) {
 $option = isset($_POST['title']) ? $_POST['title'] : false;
 if ($option) {
     $title = htmlentities($_POST['title'], ENT_QUOTES, "UTF-8");
-    echo $title;
 } else {
     echo "title must be inserted";
 }
@@ -118,9 +117,7 @@ fclose($handle);
 
 // --- CREATE A DIR FOR UPLOADED FILES AND UPLOAD FILES
 $newfolder=dirname($signpost)."/".$newindex."/";
-echo "\nCreating dir for files storing: ".$newfolder."<br>";
 mkdir($newfolder, 0777, true);
-echo "After mkdir <br>";
 
 if ($filetype == "pdf") {
     if (uploadPdf($newfolder, $newindex)){
@@ -136,7 +133,6 @@ echo "<input type='submit' value='Domů'onclick=\"window.location='../../index.p
 echo "<input type='submit' value='Nahrát další článek'onclick=\"window.location='../../approve.php';\" />";
 
 // --- REFRESH SIGHNPOST HTML FILE
-echo "Refresh sighpost html file. <br>";
 $signpost_html = "../content/".$major."/".$minor."/".$minor.".htm";
 if(!file_exists(dirname($signpost_html))) {
     mkdir(dirname($signpost_html), 0777, true);
@@ -146,22 +142,8 @@ $handle_htm = @fopen($signpost_html, "w+");
 $handle_txt= @fopen($signpost, "r");
 $start = true;
 $content = "<h3> Rozcestník </h3><br><br>";
-/*
-while (($line = fgets($handle_txt)) !== false) {
-    echo "start: ".$start."<br>";
-    if ($start == true) {
-        $start = false;
-        continue;
-    }
-    echo "line: ".$line."<br>";
-    $Data = str_getcsv($line, "_");
-    echo $Data[1];
-    $content = $content.'<a  href="#" onclick="loadArticleJS(\''.$major.'\',\''.$minor.'\',\''.$Data[0].'\')">'.$Data[1].'</a><br>';    
-}
-*/
 if (($handle = fopen($signpost, "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, "_")) !== FALSE) {
-        echo "start: ".$start."<br>";
         if ($start == true) {
             $start = false;
             continue;

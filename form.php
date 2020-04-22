@@ -15,19 +15,9 @@
 
 <script>
 function openTab(openId) {
-  if (openId == "insert") {
-    document.getElementById("delete").classList.replace("visible", "hidden");
-    document.getElementById("deleteDivMinor").classList.replace("visible", "hidden");
-    document.getElementById("deleteMainSelect").value="nothing";
-
-    document.getElementById(openId).classList.replace("hidden", "visible");
-  } else {
-    document.getElementById("insert").classList.replace("visible", "hidden");
-    document.getElementById("insertMainSelect").value="nothing";
-    minorSelected_hideAll("insert");
-    
-    document.getElementById("delete").classList.replace("hidden", "visible");
-  }
+  hideAll();
+  document.getElementById(openId).classList.replace("hidden", "visible");
+  
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
@@ -36,13 +26,33 @@ function openTab(openId) {
   console.log("Button id: " + id);
   document.getElementById(openId + "Button").classList.add("active");
 }
+
+function hideAll() {
+  //hide delete fields
+  document.getElementById("delete").classList.replace("visible", "hidden");
+  document.getElementById("deleteDivMinor").classList.replace("visible", "hidden");
+  document.getElementById("deleteMainSelect").value="nothing";
+  document.getElementById("deleteDivFile").classList.replace("visible", "hidden");
+  
+  //hide insert fields
+  document.getElementById("insert").classList.replace("visible", "hidden");
+  document.getElementById("insertMainSelect").value="nothing";
+  //minorSelected_hideAll("insert");
+
+  //hide insertAct fields
+  document.getElementById("insertAct").classList.replace("visible", "hidden");
+  document.getElementById("deleteAct").classList.replace("visible", "hidden");
+}
 </script>
 
 <div class="w3-bar w3-black" id="divTabs">
-  <button id="insertButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insert')">Vložit</button>
-  <button id="deleteButton" class="tablinks w3-bar-item w3-button" onclick="openTab('delete')">Smazat</button>
+  <button id="insertButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insert')">Vložit článek</button>
+  <button id="deleteButton" class="tablinks w3-bar-item w3-button" onclick="openTab('delete')">Smazat článek</button>
+  <button id="insertActButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertAct')">Vložit aktualitu</button>
+  <button id="deleteActButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteAct')">Smazat aktualitu</button>
 </div>
 
+<!-- ---------------------------------- ARTICLES ---------------------------------- -->
 <div id="insert" class="hidden">
   <h3> Vyplňte všechny údaje: </h3>
   <br />
@@ -85,23 +95,24 @@ function openTab(openId) {
     
     <div id="pdf" class="hidden" >
       <label for="pdfFile" class="btn">Nahrajte PDF soubor: </label>
-      <input type="file" name="pdfFile" id="pdfFile" onChange="showButton()" />
+      <input type="file" name="pdfFile" id="pdfFile" onChange="showUploadButton()" />
     </div>
 
     <div id="word" class="hidden" >
       <label for="folder" class="btn">Nahrajte složku: </label>
-      <input type="file" name="files[]" id="files" multiple="" directory="" webkitdirectory="" mozdirectory="" onChange="showButton()" />
+      <input type="file" name="files[]" id="files" multiple="" directory="" webkitdirectory="" mozdirectory="" onChange="showUploadButton()" />
     </div>
         
-    <input id="submitButton" type="submit" value="Submit the form" class="hidden"/>
+    <input id="submitButtonUpload" type="submit" value="Potvrdit nahrání" class="hidden"/>
   </form>
 </div>
 
 <div id="delete" class="hidden">
-<h3> Hello from deleting! </h3>
+<h3> Vyberte soubor ke smazání: </h3>
+<br />
 <form id="deleteForm" action="upload/delete.php" method="post"  enctype="multipart/form-data">
     <div class="selection" onchange="mainSelected('delete')">
-      <select id="deleteMainSelect" name="mainSelect">
+      <select id="deleteMainSelect" name="deleteMainSelect">
         <option value="nothing">Vyberte kategorii</option>
         <option value="OSkole">O Škole</option>
         <option value="ProZaky">Pro Žáky</option>
@@ -115,8 +126,47 @@ function openTab(openId) {
       <select id="deleteMinorSelect" name="deleteMinorSelect">
       </select>
     </div>
+
+    <div id="deleteDivFile" class="hidden selection" onchange="fileToDeleteSelected('delete')">
+      <select id="deleteFileSelect" name="deleteFileSelect">
+      </select>
+    </div>
         
-    <input id="submitButton" type="submit" value="Submit the form" class="hidden"/>
+    <input id="submitButtonDelete" type="submit" value="Odstranit článek" class="hidden"/>
   </form>
 
+</div>
+
+<!-- ---------------------------------- ACTUALITY ---------------------------------- -->
+<div id="insertAct" class="hidden">
+  <h3> Vyplňte všechny údaje: </h3>
+  <br />
+
+  <form id="insertActForm" action="upload/uploadAct.php" method="post"  enctype="multipart/form-data">
+    <div id="divActTitle" >
+      <label for="ActTitle" class="btn">Titulek:</label>
+      <input type="text" name="ActTitle" id="ActTitle" required="required" style="width:500px" />
+    </div>
+    
+    <br />
+    
+    <div id="divActText">
+      <label for="ActText">Text:</label>
+      <textarea id="ActText" name="ActText" rows="4" cols="100" required="required" ></textarea>
+    </div>
+        
+    <input id="submitButtonUpload" type="submit" value="Potvrdit nahrání" />
+  </form>
+</div>
+
+<div id="deleteAct" class="hidden">
+  <h3> Seznam posledních dvaceti článků: </h3>
+  <br />
+
+  <div id="divActTitles" >
+    <?php
+      include("upload/deleteAct.php");
+      getLastActualities(20);
+    ?>
+  </div>
 </div>

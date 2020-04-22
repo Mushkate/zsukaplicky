@@ -41,6 +41,29 @@ function minorSelected(formType){
         document.getElementById("divTitle").classList.replace("hidden", "visible");
         filetypeChosen();
     }
+    if (formType == "delete") {
+        document.getElementById("deleteDivFile").classList.replace("hidden", "visible");
+        
+        var major = document.getElementById(formType + "MainSelect").value;
+        var minor = document.getElementById(formType + "MinorSelect").value;
+
+        console.log("Calling POST for delete...");
+        $.ajax({
+            type: "POST", 
+            url: 'upload/filesToDelete.php',
+            cache: false,
+            data: {major: major, minor: minor},
+
+            success: function(obj){
+                console.log("Just success delete!");
+            }
+          })
+          .done(function( data ) {
+            console.log(data);
+            console.log("Just done delete!");
+            document.getElementById(formType + "FileSelect").innerHTML = data;
+          });;
+    }
 }
 
 function filetypeChosen(){
@@ -55,8 +78,12 @@ function filetypeChosen(){
     }
 }
 
-function showButton(){
-    document.getElementById("submitButton").classList.replace("hidden", "visible");
+function fileToDeleteSelected(formType){
+    document.getElementById("submitButtonDelete").classList.replace("hidden","visible");
+}
+
+function showUploadButton(){
+    document.getElementById("submitButtonUpload").classList.replace("hidden", "visible");
 }
 
 //hide-all methods
@@ -104,7 +131,7 @@ function setMinorFor(major, formType) {
         default:
             console.log("did not hit");
     }
-    var html="<option>Vyberte kategorii</option>";
+    var html="<option>Vyberte podkategorii</option>";
     for(var i =0; i < items.length; i++){
         html = html + "<option value=" + values[i] + ">" + items[i] + "</option>";
     }

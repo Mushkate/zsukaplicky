@@ -3,4 +3,6 @@
   <tr>
     <td class="tdMid"> <?php include "main/mid.php"; ?> </td>
     <td style="width: var(--right-size);" class="tdRight"> <?php include "main/right.php"; ?> </td>
+  </tr>
+</table>
 </div>
