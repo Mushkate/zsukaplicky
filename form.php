@@ -50,6 +50,8 @@ function hideAll() {
   <button id="deleteButton" class="tablinks w3-bar-item w3-button" onclick="openTab('delete')">Smazat článek</button>
   <button id="insertActButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertAct')">Vložit aktualitu</button>
   <button id="deleteActButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteAct')">Smazat aktualitu</button>
+  <button id="insertGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertGal')">Vložit galerii</button>
+  <button id="deleteGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteGal')">Smazat galerii</button>
 </div>
 
 <!-- ---------------------------------- ARTICLES ---------------------------------- -->
@@ -167,6 +169,46 @@ function hideAll() {
     <?php
       include("upload/deleteAct.php");
       getLastActualities(20);
+    ?>
+  </div>
+</div>
+
+
+<!-- ---------------------------------- GALERY ---------------------------------- -->
+<div id="insertGal" class="hidden">
+  <h3> Vyplňte všechny údaje: </h3>
+  <br />
+
+  <form id="insertGalForm" action="upload/uploadGal.php" method="post"  enctype="multipart/form-data">
+    <div id="divGalTitle" >
+      <label for="GalTitle" class="btn">Titulek:</label>
+      <input type="text" name="GalTitle" id="GalTitle" required="required" style="width:500px" />
+    </div>
+
+    <div id="divGalDate" >
+      <label for="GalDate" class="btn">Datum akce:</label>
+      <input type="text" name="GalDate" id="GalDate" required="required" style="width:500px" />
+    </div>
+    
+    <br />
+    
+    <div id="divGalFiles">
+      <label for="ActText">Soubory:</label>
+      <input type="file" name="files[]" id="files" multiple />
+    </div>
+        
+    <input id="submitButtonUpload" type="submit" value="Potvrdit nahrání" />
+  </form>
+</div>
+
+<div id="deleteGal" class="hidden">
+  <h3> Seznam posledních dvaceti galerií: </h3>
+  <br />
+
+  <div id="divGalTitles" >
+    <?php
+      include("upload/deleteGal.php");
+      getLastGaleries(20);
     ?>
   </div>
 </div>

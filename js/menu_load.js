@@ -42,6 +42,7 @@ function loadActuality(){
   $.ajax({
     url: "main/displayAct.php"+queryString
   }).done(function(data) {
+    console.log("data in displayAct: " + data);
     $('#divActuality').html(data);
   });
 }
@@ -51,13 +52,11 @@ function loadPager(){
   console.log("In loadPager function");
   const url = window.location.href;
   var actualPage = /page=([^&]+)/.exec(url)[1];
-  console.log(actualPage);
-  console.log("Calling POST");
 
   $.ajax({
     url: "main/getActCount.php"
   }).done(function(data) {
-    console.log("data: "+data);
+    console.log(data);
     if(actualPage==1) {
       output=generatePager(2, actualPage, data);
     } else if (actualPage==2) {
@@ -70,18 +69,14 @@ function loadPager(){
 }
 
 function generatePager(index, actualPage, actualities) {
-
-  console.log("actualPage "+actualPage);
   arrayPages=[parseInt(actualPage, 10)-2, parseInt(actualPage, 10)-1, 
     parseInt(actualPage), parseInt(actualPage, 10)+1, parseInt(actualPage, 10)+2, 
     parseInt(actualPage, 10)+3, parseInt(actualPage, 10)+4];
   actPerPage=3.;
   pages = parseInt(actualities) / actPerPage;
-  console.log("actualPage: " + actualPage + "    acutalities: " + actualities + "   pages: " + pages);
   if(parseInt(actualPage) > Math.ceil(pages)) {
     actualPage=1;
   }
-  console.log("actualPage: " + actualPage);
 
   output='<div class="pagination"> <a href="actuality.php?page='+(parseInt(actualPage)-1)+'">&laquo;</a>';
   if (pages < 5 ) {

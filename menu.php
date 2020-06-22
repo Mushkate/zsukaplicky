@@ -31,7 +31,7 @@
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniDruzina')">Školní družina</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniPoradenskePracoviste')">Školní poradenské pracoviště</a></li>
         </ul>        
-      <li><a href="contact.html">FOTOGALERIE </a></li>      
+      <li><a href="galery.php">FOTOGALERIE </a></li>      
       <li><a href="contact.html">ŽÁKOVSKÁ KNÍŽKA</a></li> 
       <li><a href="actuality.php?page=1">AKTUALITY</a></li>
     </ul>

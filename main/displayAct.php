@@ -6,10 +6,12 @@ $startIndex=($page-1)*$actPerPage;
 $endIndex=$page*$actPerPage;
 
 $years = array_diff(scandir("../actuality", SCANDIR_SORT_DESCENDING), array('..', '.')) ;
+
 $actsWentThrough=0;
 //print_r($years);
 //print(count($scanned_directory));
 $actualities=[];
+
 foreach ($years as $year){ 
     $months = array_diff(scandir("../actuality/".$year, SCANDIR_SORT_DESCENDING), array('..', '.'));
     foreach($months as $month) {
@@ -34,6 +36,10 @@ foreach ($actualities as $act ) {
     $handle = @fopen($act, "r");
     $title = fgets($handle);
     $text = fgets($handle);
+    while (!feof($handle)) {
+        $newLine=fgets($handle);
+        $text=$text."<br>".$newLine;
+    }
     fclose($handle);
     $output=$output."<td><div class='actuality'><p>".$title."</p><br>".$text."<br></div></td></tr>";
 }
