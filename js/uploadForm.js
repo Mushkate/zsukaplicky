@@ -115,8 +115,8 @@ function setMinorFor(major, formType) {
     switch(major){
         case "OSkole":
             console.log("in o skole");
-            items = ["Dokumenty", "Dokumenty ke stažení", "Vzdělávací program", "Učebny", "Organizace", "Evropské projekty", "Pedagogický sbor", "Školská rada"];
-            values = ["Dokumenty", "DokumentyKeStazeni", "VzdelavaciProgram","Ucebny","Organizace", "EvropskeProjekty", "PedagogickySbor", "SkolskaRada"];
+            items = ["Dokumenty", "Vzdělávací program", "Učebny", "Organizace", "Evropské projekty", "Pedagogický sbor", "Školská rada"];
+            values = ["Dokumenty", "VzdelavaciProgram","Ucebny","Organizace", "EvropskeProjekty", "PedagogickySbor", "SkolskaRada"];
             break;
         case "ProZaky":
             console.log("in pro zaky");

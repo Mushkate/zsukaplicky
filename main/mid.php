@@ -1,5 +1,3 @@
-<div id="mid" class="mid">
-
 <div class="animation">   
 <div class="w3-content w3-section" style="max-width:99%;margin-top:10px">
   <div class="mySlides" style="background-image:url('images/school/1.JPG');" > </div>
@@ -26,5 +24,3 @@ function carousel() {
 </script>
 </div>
 <h3>Zde bude hlavní text.</h3>
-
-</div>

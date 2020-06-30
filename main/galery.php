@@ -1,39 +1,50 @@
 <?php
-function imagePart($number) {
-    $directory = "./galery/".$number."/";
-    $files = scandir ($directory);
-    $firstFile = $directory . $files[2];
-    return "<image src=\"".$firstFile."\" style=\"height:50px\"";
-}
-
-$subDir = array();
-$galery = "./galery/";
-$signpost = $galery."galery.txt";
-
-$file = file($signpost);
+$galeryfile = "galery/galery.txt";
+$text = "<table style=\"margin-left:10%;width:90%\">";
+$counter=1;
+$file = file($galeryfile);
 $file = array_reverse($file);
-$firstStart = "<tr><td>";
-$firstEnd = "</td>";
-$secondStart = "<td>";
-$secondEnd = "</td></tr>";
-$output = "<table>";
 $first = true;
+
 foreach($file as $line){
     $pieces = explode("_", $line);
     if(count($pieces) == 1) {
         break;
     }
-    if($first) {
-        $output = $output.$firstStart."<td>";
-        $output = $output.imagePart($pieces[0])."</td><td>";
-        $output = $output.$pieces[1]."<br>".$pieces[2].$firstEnd;
-    } else {
-        $output = $output.$secondStart."<td>";
-        $output = $output.imagePart($pieces[0])."</td><td>";
-        $output = $output.$pieces[1]."<br>".$pieces[2].$secondEnd;
-    }
-    $first = !$first;
+
+    $directory = "galery/".$pieces[0];
+    $files = scandir($directory);
+    $firstFile = $directory."/".$files[2];
+
+    switch ($counter%3) {
+    case 1:
+        $text=$text."<tr><td>";
+        break;
+    case 2:
+    case 0:
+        $text=$text."<td>";
+        break;
 }
-$output = $output."</table>";
-echo $output;
+$text=$text."<br><a href=\"#\" onclick=\"showGallery('".$pieces[0]."')\"><img src=\"".$firstFile."\" width=\"100\" height=\"100\" style=\"border-radius: 50%; float:left; margin-right:20px\"><br>";
+$text=$text.$pieces[1]."<br>".$pieces[2]."</a>";
+switch ($counter%3) {
+    case 1:
+    case 2:
+        $text=$text."</td>";
+        break;
+    case 3:
+        $text=$text."</td></tr>";
+        break;
+}
+$counter++;
+}
+if ($counter%3 != 0) {
+    while ($counter%3 != 0) {
+        $text=$text."<td></td>";
+        $counter++;
+    }
+    $text=$text."</tr>";
+}
+$text=$text."</table>";
+echo $text;
 ?>

@@ -27,6 +27,7 @@
   border: 15px solid #ffff88;  
   border-radius: 20px;
   width: 77%;
+  vertical-align: top;
 }
 
 .mySlides{
@@ -34,6 +35,7 @@
   width: 100%px;
   background-position: center center;
   background-size: 1120px;
+  background-repeat: no-repeat;
 }
 p::after{
   content: "                                                                                                           ";

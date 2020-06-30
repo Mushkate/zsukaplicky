@@ -1,7 +1,7 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
 
-function uploadPdf($newfolder, $newindex) {
+function uploadPdf($newPathAndFileNameWithoutSuffix) {
     $info = pathinfo($_FILES['pdfFile']['name']);
     $ext = $info['extension']; // get the extension of the file
     
@@ -10,27 +10,27 @@ function uploadPdf($newfolder, $newindex) {
         return false;
     }
 
-    $target_pdf = $newfolder."/".$newindex.".pdf";
-    $target_htm = $newfolder."/".$newindex.".htm";
+    $target_pdf = $newPathAndFileNameWithoutSuffix.".pdf";
+    $target_htm = $newPathAndFileNameWithoutSuffix.".htm";
 
     move_uploaded_file( $_FILES['pdfFile']['tmp_name'], $target_pdf);
     $newFile = fopen($target_htm, "w");
-    $content = '<object data="content/'.$newfolder."/".$newindex.'.pdf" type="application/pdf" width="100%" height="100%">
-    alt : <a href="'.$newfolder."/".$newindex.'.php">PDF for you</a>
+    $content = '<object data="content/'.$newPathAndFileNameWithoutSuffix.'.pdf" type="application/pdf" width="100%" height="800">
+    alt : <a href="'.$newPathAndFileNameWithoutSuffix.'.php">PDF for you</a>
     </object>';
     fwrite($newFile, $content);
     fclose($newFile);
     return true;
 }
 
-function uploadWord($major, $minor) {
+function uploadWord($newPathAndFileNameWithoutSuffix) {
     $count = 0;
     $dir="";
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         foreach ($_FILES['files']['name'] as $i => $name) {            
             if (substr($name, -4) === ".htm"){
-                $dir="../content/".$major."/".$minor."_soubory/";
-                $newfile = "../content/".$major."/".$minor."1.htm";
+                $dir="../content/".$newPathAndFileNameWithoutSuffix."_soubory/";
+                $newfile = "../content/".$newPathAndFileNameWithoutSuffix."1.htm";
                 mkdir($dir, 0777, true);
                 move_uploaded_file($_FILES['files']['tmp_name'][$i], $newfile);
 
@@ -39,14 +39,14 @@ function uploadWord($major, $minor) {
                 $str=file_get_contents($newfile);
 
                 //replace something in the file string - this is a VERY simple example
-                $str=str_replace($oldFolder, "content/".$major."/".$minor."_soubory", $str);
+                $str=str_replace($oldFolder, "content/".$newPathAndFileNameWithoutSuffix."_soubory", $str);
                 
                 //convert to utf-8
                 // $str=str_replace("windows-1250", "utf-8", $str);
                 // iconv('WINDOWS-1250', 'UTF-8', $str);
 
                 //write the entire string
-                file_put_contents("../content/".$major."/".$minor.".htm", $str);
+                file_put_contents("../content/".$newPathAndFileNameWithoutSuffix.".htm", $str);
                 break;
             }
         }
@@ -56,6 +56,21 @@ function uploadWord($major, $minor) {
             }
             move_uploaded_file($_FILES['files']['tmp_name'][$i],$dir.$name);
         }
+    }
+}
+
+function delete_files($target) {
+    getcwd();
+    if(is_dir($target)){
+        $files = glob( $target . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
+
+        foreach( $files as $file ){
+            delete_files( $file );   
+        };
+         
+        rmdir($target);  
+    } elseif(is_file($target)) {
+        unlink( $target );  
     }
 }
 
@@ -89,42 +104,57 @@ if ($option) {
 
 
 // --- CREATE SIGNPOST IN SPECIFIED FOLDER ---
-$signpost = "../content/".$major."/".$minor."/".$minor.".txt";
-
-if(!file_exists(dirname($signpost))) {
-    mkdir(dirname($signpost), 0777, true);
-}
-
-if(!file_exists($signpost)){
-    $handle = @fopen($signpost, "w+");
-    fwrite($handle, "1\n");
-    fwrite($handle, "1_".$title); //the author should be added to the last column
-    $newindex=intval("1");
+// sections: Organizace, Pedagogický sobr, Školská rada, Bezpečná škola, Dětský parlament, Školní řád - mají jen jeden soubor
+$noSignpost = ["Organizace", "PedagogickySbor", "SkolskaRada", "BezpecnaSkola", "DetskyParlament", "SkolniRad"];
+            
+if ( in_array($minor, $noSignpost)){
 } else {
-    $handle = @fopen($signpost, "r");
-    $index = intval(fgets($handle));
-    $newindex = ($index+1);
+    $signpost = "../content/".$major."/".$minor."/".$minor.".txt";
+    if(!file_exists(dirname($signpost))) {
+        mkdir(dirname($signpost), 0777, true);
+    }
+
+    if(!file_exists($signpost)){
+        $handle = @fopen($signpost, "w+");
+        fwrite($handle, "1\n");
+        fwrite($handle, "1_".$title); //the author should be added to the last column
+        $newindex=intval("1");
+    } else {
+        $handle = @fopen($signpost, "r");
+        $index = intval(fgets($handle));
+        $newindex = ($index+1);
+        fclose($handle);
+        $handle = @fopen($signpost, "a");
+        fwrite($handle, "\n".($newindex)."_".$title);
+
+        $lines = file($signpost, FILE_IGNORE_NEW_LINES);
+        $lines[0] = ($newindex);
+        file_put_contents($signpost , implode("\n", $lines));
+    }
+
     fclose($handle);
-    $handle = @fopen($signpost, "a");
-    fwrite($handle, "\n".($newindex)."_".$title);
-
-    $lines = file($signpost, FILE_IGNORE_NEW_LINES);
-    $lines[0] = ($newindex);
-    file_put_contents($signpost , implode("\n", $lines));
 }
-
-fclose($handle);
 
 // --- CREATE A DIR FOR UPLOADED FILES AND UPLOAD FILES
-$newfolder=dirname($signpost)."/".$newindex."/";
-mkdir($newfolder, 0777, true);
+if ( in_array($minor, $noSignpost)){
+    $newfolder = "../content/".$major."/".$minor."/";
+    $newPathAndFileNameWithoutSuffix=$newfolder.$minor;
+    if(file_exists($newfolder)) {
+        delete_files($newfolder);
+    }
+    mkdir($newfolder, 0777, true);
+} else {
+    $newfolder=dirname($signpost)."/".$newindex."/";
+    $newPathAndFileNameWithoutSuffix=dirname($signpost)."/".$newindex."/".$newindex;
+    mkdir($newfolder, 0777, true);
+}
 
 if ($filetype == "pdf") {
-    if (uploadPdf($newfolder, $newindex)){
+    if (uploadPdf($newPathAndFileNameWithoutSuffix)){
         echo "<img src=\"../images/green-tick.png\" style=\"height: 20px\"></img>Soubor byl nahrán.";
     }
 } else {
-    uploadWord($newfolder, $newindex);
+    uploadWord($newPathAndFileNameWithoutSuffix);
     echo "<img src=\"../images/green-tick.png\" style=\"height: 20px\"></img>Soubory byly nahrány.";
 }
 
@@ -133,27 +163,29 @@ echo "<input type='submit' value='Domů'onclick=\"window.location='../../index.p
 echo "<input type='submit' value='Nahrát další článek'onclick=\"window.location='../../approve.php';\" />";
 
 // --- REFRESH SIGHNPOST HTML FILE
-$signpost_html = "../content/".$major."/".$minor."/".$minor.".htm";
-if(!file_exists(dirname($signpost_html))) {
-    mkdir(dirname($signpost_html), 0777, true);
-}
-
-$handle_htm = @fopen($signpost_html, "w+");
-$handle_txt= @fopen($signpost, "r");
-$start = true;
-$content = "<h3> Rozcestník </h3><br><br>";
-if (($handle = fopen($signpost, "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, "_")) !== FALSE) {
-        if ($start == true) {
-            $start = false;
-            continue;
-        }
-        $content = $content.'<a  href="#" onclick="loadArticleJS(\''.$major.'\',\''.$minor.'\',\''.$data[0].'\')">'.$data[1].'</a><br>';    
+if ( ! in_array($minor, $noSignpost)){
+    $signpost_html = "../content/".$major."/".$minor."/".$minor.".htm";
+    if(!file_exists(dirname($signpost_html))) {
+        mkdir(dirname($signpost_html), 0777, true);
     }
-    fclose($handle);
-}
-echo $content;
-fwrite($handle_htm, $content);
-fclose($handle_htm);
 
+    $handle_htm = @fopen($signpost_html, "w+");
+    $handle_txt= @fopen($signpost, "r");
+    $start = true;
+    $content = "<div style=\"text-align: center;\"><h1> Rozcestník </h1><br><br>";
+    if (($handle = fopen($signpost, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, "_")) !== FALSE) {
+            if ($start == true) {
+                $start = false;
+                continue;
+            }
+            $content = $content.'<a  href="#" onclick="loadArticleJS(\''.$major.'\',\''.$minor.'\',\''.$data[0].'\')">'.$data[1].'</a><br>';    
+        }
+        fclose($handle);
+    }
+    $content=$content."</div>";
+    echo $content;
+    fwrite($handle_htm, $content);
+    fclose($handle_htm);
+}
 ?>

@@ -2,9 +2,8 @@
   <nav>
       <ul>
         <li><a href="about.html">O ŠKOLE<i class="fa fa-caret-down fa-fw" aria-hidden="true"></i></a>
-        <ul>
+        <ul id="submenu">
           <li><a href="#" onclick="loadPageJs('OSkole', 'Dokumenty')">Dokumenty</a></li>
-          <li><a href="#" onclick="loadPageJs('OSkole', 'DokumentyKeStazeni')">Dokumenty ke stažení</a></li>
           <li><a href="#" onclick="loadPageJs('OSkole', 'VzdelavaciProgram')">Vzdělávací program</a></li>
           <li><a href="#" onclick="loadPageJs('OSkole', 'Ucebny')">Učebny</a></li>
           <li><a href="#" onclick="loadPageJs('OSkole', 'Organizace')">Organizace</a></li>
@@ -15,7 +14,7 @@
         </ul>  
       </li>
       <li><a href="services.html">PRO ŽÁKY<i class="fa fa-caret-down fa-fw" aria-hidden="true"></i></a>
-        <ul>
+        <ul class="submenu">
           <li><a href="#" onclick="loadPageJs('ProZaky', 'SkolniRok')">Školní rok 2019/2020</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'PlanovaneAkce')">Plánované akce</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'BezpecnaSkola')">Bezpečná škola</a></li>
@@ -24,7 +23,7 @@
         </ul>
       </li>                       
       <li><a href="products.html">PRO RODIČE<i class="fa fa-caret-down fa-fw" aria-hidden="true"></i></a>
-        <ul>
+        <ul class="submenu">
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniRok')">Školní rok 2019/2020</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'Informace')">Informace</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniJidelna')">Školní jídelna</a></li>

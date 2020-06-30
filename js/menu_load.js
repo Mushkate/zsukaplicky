@@ -5,15 +5,19 @@ function loadPageJs(major, minor){
     url: 'content/' + major + '/' + minor + '/' + minor + '.htm',
     cache: false,
     beforeSend: function( xhr ) {
-      //xhr.overrideMimeType( "text/plain; charset=windows-1250" );
-      xhr.overrideMimeType( "text/plain; charset=UTF-8" );
+      noSignpost = ["Organizace", "PedagogickySbor", "SkolskaRada", "BezpecnaSkola", "DetskyParlament", "SkolniRad"];
+      if ( noSignpost.includes(minor)){
+        console.log("no signpost detected");
+        xhr.overrideMimeType( "text/plain; charset=windows-1250" );
+      } else {
+        xhr.overrideMimeType( "text/plain; charset=UTF-8" );
+      }
     }
   })
     .done(function( data ) {
-      console.log(data);
-      $('#mid').html(data);
-      console.log("cache: false");
-    });
+      $('.tdMid').html(data);
+      document.getElementById("submenu").style.visibility = "false";
+          });
 
 }
 
@@ -28,8 +32,7 @@ function loadArticleJS(major, minor, index) {
     }
   })
     .done(function( data ) {
-      console.log(data);
-      $('#mid').html(data);
+      $('.tdMid').html(data);
     });
 }
 

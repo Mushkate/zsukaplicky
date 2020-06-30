@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style/right.css"> 
   <link rel="stylesheet" href="style/pin.css">  
   <link rel="stylesheet" href="style/menu.css">  
+  <link rel="stylesheet" href="style/galery.css">  
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
   
   <!--<script
@@ -20,6 +21,7 @@
         <script src="js/menu.js" type="text/javascript"></script>
         <!--<script src="upload/upload.js" type="text/javascript"></script>-->
         <script src="js/menu_load.js" type="text/javascript"></script>
+        <script src="js/galery.js" type="text/javascript"></script>
                 
         <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Marcellus&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
@@ -31,6 +33,7 @@
 </head>
 <body style="z-index:0">                          
 <div class="header" id="header">
+<a href="index.php">
   <table class="headerTable">
     <tr>
       <td><img src="images/children.jpg" class="childImg" ></td>
@@ -38,19 +41,23 @@
       <td><img src="images/logo.jpg" style="max-height:90px"></td>
     </tr>
   </table>
-
+</a>
 </div>                               
-                                
+                    
 <?php 
     include 'menu.php';  
-?>
-<div id="main" class="main">
-    <?php
+    echo "<div id=\"main\" class=\"main\">
+    <table class=\"tableMid\">
+    <tr>
+      <td class=\"tdMid\"><h1 style=\"text-align:center\">Galerie</h1><br>";
     include './main/galery.php';
-    ?>
-</div>
-<?php
+    echo "</td>
+      <td style=\"width: var(--right-size);\" class=\"tdRight\">";
+    include "main/right.php"; 
+    echo "</td></tr> </table>";
+    echo "</div>";
     include 'footer.php'
-  ?>
+?>
+
 </body>
 </html>

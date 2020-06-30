@@ -29,8 +29,22 @@
   .mySlides {display:none;}
   </style>
 </head>
+<script>
+window.onload=function(){
+  console.log("in onload");
+  var submenus = document.getElementsByClassName('submenu');
+  document.getElementById('menu').addEventListener('onclick', function(){
+    console.log("in event");
+    for(var i=0, len=coll.length; i<len; i++)
+    {
+        submenus[i].style["visibility"] = hidden;
+    }
+  });
+}
+</script>
 <body style="z-index:0">                          
 <div class="header" id="header">
+<a href="index.php">
   <table class="headerTable">
     <tr>
       <td><img src="images/children.jpg" class="childImg" ></td>
@@ -38,7 +52,7 @@
       <td><img src="images/logo.jpg" style="max-height:90px"></td>
     </tr>
   </table>
-
+</a>
 </div>                               
                                 
 <?php 
