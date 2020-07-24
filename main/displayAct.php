@@ -1,9 +1,15 @@
 <?php
 
 $page = $_GET['page'];
-$actPerPage=3;
-$startIndex=($page-1)*$actPerPage;
-$endIndex=$page*$actPerPage;
+if ($page > 0 ) {
+    $actPerPage=10;
+    $startIndex=($page-1)*$actPerPage;
+    $endIndex=$page*$actPerPage;
+} else {
+    $actPerPage=3;
+    $startIndex=0;
+    $endIndex=3;
+}
 
 $years = array_diff(scandir("../actuality", SCANDIR_SORT_DESCENDING), array('..', '.')) ;
 
@@ -30,7 +36,11 @@ foreach ($years as $year){
         break;
     }
 } 
+
 $output='<table class="actuality_table"><tr>';
+if ($page < 0 ) {
+    $output='<h2>Aktuality</h2>'.$output;
+}
 foreach ($actualities as $act ) {
     $cont=file_get_contents($act);
     $handle = @fopen($act, "r");
@@ -41,7 +51,11 @@ foreach ($actualities as $act ) {
         $text=$text."<br>".$newLine;
     }
     fclose($handle);
-    $output=$output."<td><div class='actuality'><p>".$title."</p><br>".$text."<br></div></td></tr>";
+    if ($page > 0) {
+        $output=$output."<td><div class='actuality'><p>".$title."</p><br>".$text."<br></div></td></tr>";
+    } else {
+        $output=$output."<td><div class='actuality'><p style=\"font-weight:bold\">".$title."</p><br>".$text."<br></div></td></tr>";
+    }
 }
 $output=$output."</table>";
 echo $output;

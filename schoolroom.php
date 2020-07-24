@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="style/right.css"> 
   <link rel="stylesheet" href="style/pin.css">  
   <link rel="stylesheet" href="style/menu.css">  
+  <link rel="stylesheet" href="style/galery.css">  
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/logo.png">
   
   <!--<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -21,6 +21,7 @@
         <script src="js/menu.js" type="text/javascript"></script>
         <!--<script src="upload/upload.js" type="text/javascript"></script>-->
         <script src="js/menu_load.js" type="text/javascript"></script>
+        <script src="js/schoolroom.js" type="text/javascript"></script>
                 
         <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Marcellus&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
@@ -30,19 +31,6 @@
   .mySlides {display:none;}
   </style>
 </head>
-<script>
-window.onload=function(){
-  console.log("in onload");
-  var submenus = document.getElementsByClassName('submenu');
-  document.getElementById('menu').addEventListener('onclick', function(){
-    console.log("in event");
-    for(var i=0, len=coll.length; i<len; i++)
-    {
-        submenus[i].style["visibility"] = hidden;
-    }
-  });
-}
-</script>
 <body style="z-index:0">                          
 <div class="header" id="header">
 <a href="index.php">
@@ -55,11 +43,21 @@ window.onload=function(){
   </table>
 </a>
 </div>                               
-                                
+                    
 <?php 
     include 'menu.php';  
-    include 'body.php';
+    echo "<div id=\"main\" class=\"main\">
+    <table class=\"tableMid\">
+    <tr>
+      <td class=\"tdMid\"><h1 style=\"text-align:center\">Přehled učeben</h1><br>";
+    include './main/schoolroom.php';
+    echo "</td>
+      <td style=\"width: var(--right-size);\" class=\"tdRight\">";
+    include "main/right.php"; 
+    echo "</td></tr> </table>";
+    echo "</div>";
     include 'footer.php'
-  ?>
+?>
+
 </body>
 </html>

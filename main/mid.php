@@ -23,4 +23,10 @@ function carousel() {
 }
 </script>
 </div>
-<h3>Zde bude hlavní text.</h3>
+
+<div style="margin: 10px; margin-top: 50px;">
+
+<script>
+  loadPageJs("UvodniStranka", "UvodniStranka");
+</script>
+</div>

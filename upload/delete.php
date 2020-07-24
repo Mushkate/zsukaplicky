@@ -2,7 +2,6 @@
 header('Content-type: text/html; charset=utf-8');
 
 function delete_files($target) {
-    getcwd();
     if(is_dir($target)){
         $files = glob( $target . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
 

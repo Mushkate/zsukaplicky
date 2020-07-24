@@ -5,7 +5,7 @@ function loadPageJs(major, minor){
     url: 'content/' + major + '/' + minor + '/' + minor + '.htm',
     cache: false,
     beforeSend: function( xhr ) {
-      noSignpost = ["Organizace", "PedagogickySbor", "SkolskaRada", "BezpecnaSkola", "DetskyParlament", "SkolniRad"];
+      noSignpost = ["Organizace", "PedagogickySbor", "SkolskaRada", "BezpecnaSkola", "DetskyParlament", "SkolniRad", "UvodniStranka"];
       if ( noSignpost.includes(minor)){
         console.log("no signpost detected");
         xhr.overrideMimeType( "text/plain; charset=windows-1250" );
@@ -15,12 +15,15 @@ function loadPageJs(major, minor){
     }
   })
     .done(function( data ) {
-      $('.tdMid').html(data);
+      if (minor == "UvodniStranka") {
+        $('.tdMid').append(data);
+      } else {
+        $('.tdMid').html(data);
+      }
       document.getElementById("submenu").style.visibility = "false";
           });
 
 }
-
 
 function loadArticleJS(major, minor, index) {
   console.log("loading exact page fragment. major: " + major + " minor: " + minor + " index:" + index);
@@ -32,7 +35,9 @@ function loadArticleJS(major, minor, index) {
     }
   })
     .done(function( data ) {
-      $('.tdMid').html(data);
+      stepBack = "<div style=\"margin:20px\"><a href=# onclick=\"loadPageJs('" + major + "', '" + minor + "')\"> &larr; Zpět na rozcestník</a>"
+      $('.tdMid').html(stepBack);
+      $('.tdMid').append(data);
     });
 }
 
@@ -47,6 +52,16 @@ function loadActuality(){
   }).done(function(data) {
     console.log("data in displayAct: " + data);
     $('#divActuality').html(data);
+  });
+}
+
+function loadShortActuality(){
+  console.log("In loadShortActuality function");
+  $.ajax({
+    url: "main/displayAct.php?page=-1"
+  }).done(function(data) {
+    console.log("data in displayAct: " + data);
+    $('#shortAct').html(data);
   });
 }
 

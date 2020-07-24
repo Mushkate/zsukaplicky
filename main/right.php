@@ -1,4 +1,11 @@
-<div id="right" class="right">
+<div id="shortAct" class="pin">
+
+<script type="text/javascript">
+loadShortActuality(); //in menu_load.js
+</script>
+
+</div>
+
 
 <div id="holiday" class="pin">
 <h2>Prázdniny</h2>
@@ -13,7 +20,5 @@
   <tr> <td> telefon: </td> <td> 732 879 616 </td> </tr>
   <tr> <td> adresa: </td> <td> ZŠ u Kapličky 959, Orlová-Lutyně </td> </tr>
 </table>
-
-<div>
-
 </div>
+

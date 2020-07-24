@@ -1,7 +1,10 @@
            
 <link rel="stylesheet" href="style/header.css">   
 <link rel="stylesheet" href="style/select.css">  
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">            
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">      
+
+<script src="js/galery.js" type="text/javascript"></script>
+              
 
 <div class="header" id="header">
   <table class="headerTable">
@@ -16,8 +19,10 @@
 <script>
 function openTab(openId) {
   hideAll();
+  console.log("after hide all");
+  console.log("before getelementbyid for " + openId);
   document.getElementById(openId).classList.replace("hidden", "visible");
-  
+  console.log("after getelementbyid");
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
@@ -52,6 +57,7 @@ function hideAll() {
   <button id="deleteActButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteAct')">Smazat aktualitu</button>
   <button id="insertGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertGal')">Vložit galerii</button>
   <button id="deleteGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteGal')">Smazat galerii</button>
+  <button id="insertSchRoomButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertSchRoom')">Vložit učebnu</button>
 </div>
 
 <!-- ---------------------------------- ARTICLES ---------------------------------- -->
@@ -63,6 +69,7 @@ function hideAll() {
     <div class="selection" onchange="mainSelected('insert')">
       <select id="insertMainSelect" name="insertMainSelect">
         <option value="nothing">Vyberte kategorii</option>
+        <option value="UvodniStranka">Úvodní stránka</option>
         <option value="OSkole">O Škole</option>
         <option value="ProZaky">Pro Žáky</option>
         <option value="ProRodice">Pro Rodiče</option>
@@ -202,13 +209,45 @@ function hideAll() {
 </div>
 
 <div id="deleteGal" class="hidden">
-  <h3> Seznam posledních dvaceti galerií: </h3>
+  <h3> Seznam galerií: </h3>
   <br />
 
   <div id="divGalTitles" >
     <?php
-      include("upload/deleteGal.php");
-      getLastGaleries(20);
+      include("upload/handleGal.php");
+      getGaleries();
     ?>
   </div>
 </div>
+
+
+<!-- ---------------------------------- Schoolroom ---------------------------------- -->
+<div id="insertSchRoom" class="hidden">
+  <h3> Vyplňte všechny údaje: </h3>
+  <br />
+
+  <form id="insertSchRoomForm" action="upload/uploadSchRoom.php" method="post"  enctype="multipart/form-data">
+    <div id="divSchRoomTitle" >
+      <label for="SchRoomTitle" class="btn">Titulek:</label>
+      <input type="text" name="SchRoomTitle" id="SchRoomTitle" required="required" style="width:500px" />
+    </div>
+
+    <div id="divSchRoomText" >
+      <label for="SchRoomText" class="btn">Text o učebně:</label>
+      <textarea id="SchRoomText" name="SchRoomText" required="required" rows="4" cols="50"></textarea>
+    </div>
+    
+    <br />
+    
+    <div id="divGalFiles">
+      <label for="ActText">Soubory:</label>
+      <input type="file" name="files[]" id="files" multiple />
+    </div>
+        
+    <input id="submitButtonUpload" type="submit" value="Potvrdit nahrání" />
+  </form>
+</div>
+
+<div id="deleteGal" class="hidden">
+</div>
+

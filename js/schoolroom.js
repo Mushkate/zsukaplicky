@@ -12,27 +12,14 @@ function enlargeImage(imgs) {
   $(document).scrollTop($(document).height());
 }
 
-function showGallery(galery) {
-  console.log("in showGalery");
+function showSchoolroom(galery) {
+  console.log("in showSchoolroom");
   $.ajax({
     type: "POST",
-    url: "main/galeryLoadImages.php",
+    url: "main/schoolroomLoadImages.php",
     data: ({name: galery}),
   }).done(function(data) {
     console.log("in done of showGlaery")
-    $('.tdMid').html(data);
-  });
-}
-
-function deleteGal(id){
-  console.log("deleting galery with id " + id);
-  $.ajax({
-    type: "POST",
-    url: "upload/deleteGal.php",
-    data: ({id: id}),
-  }).done(function(data) {
-    console.log("in done of deleteGal")
-    console.log("gotten data: " + data);
     $('.tdMid').html(data);
   });
 }

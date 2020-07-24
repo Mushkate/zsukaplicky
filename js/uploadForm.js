@@ -128,6 +128,10 @@ function setMinorFor(major, formType) {
             items = ["Školní rok 2019/2020", "Informace", "Školní Jídelna", "Školní Družina", "Školní Poradenské Pracoviště"];
             values = ["SkolniRok", "PlanovaneAkce", "BezpecnaSkola", "DetskyParlament", "SkolniRad"]
             break;
+        case "UvodniStranka":
+            console.log("in uvodni stranka");
+            items = ["Úvodní stránka"];
+            values = ["UvodniStranka"];
         default:
             console.log("did not hit");
     }

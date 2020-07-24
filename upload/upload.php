@@ -104,8 +104,8 @@ if ($option) {
 
 
 // --- CREATE SIGNPOST IN SPECIFIED FOLDER ---
-// sections: Organizace, Pedagogický sobr, Školská rada, Bezpečná škola, Dětský parlament, Školní řád - mají jen jeden soubor
-$noSignpost = ["Organizace", "PedagogickySbor", "SkolskaRada", "BezpecnaSkola", "DetskyParlament", "SkolniRad"];
+// sections: Organizace, Pedagogický sobr, Školská rada, Bezpečná škola, Dětský parlament, Školní řád, Úvodní stránka - mají jen jeden soubor
+$noSignpost = ["Organizace", "PedagogickySbor", "SkolskaRada", "BezpecnaSkola", "DetskyParlament", "SkolniRad", "UvodniStranka"];
             
 if ( in_array($minor, $noSignpost)){
 } else {

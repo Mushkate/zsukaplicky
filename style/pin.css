@@ -10,11 +10,10 @@
 }
 
 .pin {
-    width: 80%;
     background: lightblue;
     margin: 0;
-    margin-left: 9%;
     padding-bottom: 10px;
+    font-weight: normal;
 }
 
 .pin ul {
