@@ -43,7 +43,7 @@
 </div>                                    
                                 
 <?php 
-    include 'menu.php';  
+    include 'menu.php'
 ?>
 <div id="main" class="main">
     <table class="tableMid">

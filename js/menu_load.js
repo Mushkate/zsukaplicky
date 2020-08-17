@@ -18,6 +18,9 @@ function loadPageJs(major, minor){
       if (minor == "UvodniStranka") {
         $('.tdMid').append(data);
       } else {
+        if(!$('.tdMid').length) {
+          $('.tdMidAct').addClass("tdMid").removeClass("tdMidAct");
+        }
         $('.tdMid').html(data);
       }
       document.getElementById("submenu").style.visibility = "false";
