@@ -136,8 +136,8 @@ function setMinorFor(major, formType) {
             break;
         case "ProZaky":
             console.log("in pro zaky");
-            items = ["Školní rok 2019/2020", "Plánované Akce", "Bezpčená Škola", "Dětský Parlament", "Školní Řád"];
-            values = ["SkolniRok", "PlanovaneAkce", "BezpecnaSkola", "DetskyParlament", "SkolniRad"]
+            items = ["Školní rok 2019/2020", "Plánované Akce", "Dětský Parlament", "Školní Řád"];
+            values = ["SkolniRok", "PlanovaneAkce", "DetskyParlament", "SkolniRad"]
             break;        
         case "ProRodice":
             console.log("in pro zaky");

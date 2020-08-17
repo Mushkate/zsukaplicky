@@ -8,7 +8,7 @@
           <li><a href="schoolroom.php">Učebny</a></li>
           <li><a href="#" onclick="loadPageJs('OSkole', 'Organizace')">Organizace</a></li>
           <li><a href="#" onclick="loadPageJs('OSkole', 'EvropskeProjekty')">Evropské projekty</a></li>
-          <li><a href="#" onclick="loadPageJs('OSkole', 'Pedagogickysbor')">Pedagogický sbor</a></li>
+          <li><a href="#" onclick="loadPageJs('OSkole', 'PedagogickySbor')">Pedagogický sbor</a></li>
           <li><a href="#" onclick="loadPageJs('OSkole', 'SkolskaRada')">Školská rada</a></li>
        
         </ul>  
@@ -17,7 +17,6 @@
         <ul class="submenu">
           <li><a href="#" onclick="loadPageJs('ProZaky', 'SkolniRok')">Školní rok 2020/2021</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'PlanovaneAkce')">Plánované akce</a></li>
-          <li><a href="#" onclick="loadPageJs('ProZaky', 'BezpecnaSkola')">Bezpečná škola</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'DetskyParlament')">Dětský parlament</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'SkolniRad')">Školní řád</a></li>
         </ul>
