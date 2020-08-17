@@ -90,7 +90,7 @@ function generatePager(index, actualPage, actualities) {
   arrayPages=[parseInt(actualPage, 10)-2, parseInt(actualPage, 10)-1, 
     parseInt(actualPage), parseInt(actualPage, 10)+1, parseInt(actualPage, 10)+2, 
     parseInt(actualPage, 10)+3, parseInt(actualPage, 10)+4];
-  actPerPage=3.;
+  actPerPage=10.;
   pages = parseInt(actualities) / actPerPage;
   if(parseInt(actualPage) > Math.ceil(pages)) {
     actualPage=1;

@@ -19,6 +19,7 @@
   padding: 0;  
   border: 15px solid #ffff88;  
   background-color: #ffff88;
+  vertical-align: top;
 }
 
 .tdMid {

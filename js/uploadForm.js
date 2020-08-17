@@ -78,12 +78,28 @@ function filetypeChosen(){
     }
 }
 
+function indexFiletypeChosen(){
+    var value = document.getElementById("indexFileType").value;
+    console.log("indexFileType.value: ", value);
+    if (value == "pdf") {
+        document.getElementById("indexPdf").classList.replace("hidden", "visible");
+        document.getElementById("indexWord").classList.replace("visible", "hidden");
+    } else {
+        document.getElementById("indexWord").classList.replace("hidden", "visible");
+        document.getElementById("indexPdf").classList.replace("visible", "hidden");
+    }
+}
+
 function fileToDeleteSelected(formType){
     document.getElementById("submitButtonDelete").classList.replace("hidden","visible");
 }
 
 function showUploadButton(){
     document.getElementById("submitButtonUpload").classList.replace("hidden", "visible");
+}
+
+function indexShowUploadButton(){
+    document.getElementById("indexSubmitButtonUpload").classList.replace("hidden", "visible");
 }
 
 //hide-all methods
@@ -126,12 +142,8 @@ function setMinorFor(major, formType) {
         case "ProRodice":
             console.log("in pro zaky");
             items = ["Školní rok 2019/2020", "Informace", "Školní Jídelna", "Školní Družina", "Školní Poradenské Pracoviště"];
-            values = ["SkolniRok", "PlanovaneAkce", "BezpecnaSkola", "DetskyParlament", "SkolniRad"]
+            values = ["SkolniRok", "Informace", "SkolniJidelna", "SkolniDruzina", "SkolniPoradenskePracoviste"]
             break;
-        case "UvodniStranka":
-            console.log("in uvodni stranka");
-            items = ["Úvodní stránka"];
-            values = ["UvodniStranka"];
         default:
             console.log("did not hit");
     }

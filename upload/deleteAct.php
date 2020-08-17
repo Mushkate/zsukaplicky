@@ -30,10 +30,12 @@ function getLastActualities($number){
         $handle = @fopen($act, "r");
         $title = fgets($handle);
         fclose($handle);
-        $output=$output."<td>$title</td><td><input type='button' value='Smazat'></input></td></tr>";
+        $output=$output."<td>$title</td><td><input type='button' value='Smazat' onclick=\"deleteActJS('$act')\"></input></td></tr>";
     }
     $output=$output."</table>";
     echo $output;
 }
+
+
 
 ?>

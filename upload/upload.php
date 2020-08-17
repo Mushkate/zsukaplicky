@@ -1,5 +1,7 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
+session_start();
+echo session_id();
 
 function uploadPdf($newPathAndFileNameWithoutSuffix) {
     $info = pathinfo($_FILES['pdfFile']['name']);
@@ -92,14 +94,22 @@ $option = isset($_POST['fileType']) ? $_POST['fileType'] : false;
 if ($option) {
     $filetype = htmlentities($_POST['fileType'], ENT_QUOTES, "UTF-8");
 } else {
-    echo "fileType option is required";
+    $option = isset($_POST['indexFileType']) ? $_POST['indexFileType'] : false;
+    if($option) {
+        $filetype = htmlentities($_POST['indexFileType'], ENT_QUOTES, "UTF-8");
+    } else {
+        echo "fileType option is required";
+    }
 }
 
-$option = isset($_POST['title']) ? $_POST['title'] : false;
+$option = isset($_POST['fileType']) ? $_POST['fileType'] : false;
 if ($option) {
-    $title = htmlentities($_POST['title'], ENT_QUOTES, "UTF-8");
-} else {
-    echo "title must be inserted";
+    $option = isset($_POST['title']) ? $_POST['title'] : false;
+    if ($option) {
+        $title = htmlentities($_POST['title'], ENT_QUOTES, "UTF-8");
+    } else {
+        echo "title must be inserted";
+    }
 }
 
 

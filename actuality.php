@@ -31,6 +31,7 @@
 </head>
 <body style="z-index:0">                          
 <div class="header" id="header">
+<a href="index.php">
   <table class="headerTable">
     <tr>
       <td><img src="images/children.jpg" class="childImg" ></td>
@@ -38,8 +39,8 @@
       <td><img src="images/logo.jpg" style="max-height:90px"></td>
     </tr>
   </table>
-
-</div>                               
+</a>
+</div>                                    
                                 
 <?php 
     include 'menu.php';  

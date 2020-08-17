@@ -14,10 +14,11 @@
 <body style="margin: 20px">
 
  <?php
+
+session_start();
       if(isset($_POST['submit'])){
         $username = $_POST['username']; $password = $_POST['password'];
         if($username === 'admin' && $password === 'MameRadiDeti2019'){
-          session_start();
           $_SESSION['login'] = true; 
           echo '<style type="text/css">
         #logform {
@@ -29,25 +30,22 @@
         }
 
       }
+
+      if(isset($_SESSION['login'])) {
+        include 'form.php';
+      } else {
+        echo '<form action="" method="post" id="logform">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="pwd">Password:</label>
+          <input type="password" class="form-control" id="pwd" name="password" required>
+        </div>
+        <button type="submit" name="submit" class="btn btn-default">Login</button>
+      </form>';
+      }
     ?>
-    <form action="" method="post" id="logform">
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" class="form-control" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd" name="password" required>
-      </div>
-      <button type="submit" name="submit" class="btn btn-default">Login</button>
-    </form>
-
-<?php     
-
-if(isset($_SESSION['login'])) {
-  include 'form.php';
-}
-  
-?>
-
+    
 <body>

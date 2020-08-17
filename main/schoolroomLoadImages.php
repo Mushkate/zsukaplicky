@@ -40,7 +40,7 @@ foreach($files as $file) {
     $text = $text."<div class=\"row\">";
   }
   $text = $text."<div class=\"column\">
-    <img src=\"../schoolroom/".$schroomNumber."/".$file."\" onclick=\"enlargeImage(this);\">
+    <img src=\"./schoolroom/".$schroomNumber."/".$file."\" onclick=\"enlargeImage(this);\">
   </div>";
   if ($counter%$pictures_per_row == 0) {
     $text = $text."</div>";

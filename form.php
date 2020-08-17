@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">      
 
 <script src="js/galery.js" type="text/javascript"></script>
+<script src="js/act.js" type="text/javascript"></script>
               
 
 <div class="header" id="header">
@@ -47,6 +48,18 @@ function hideAll() {
   //hide insertAct fields
   document.getElementById("insertAct").classList.replace("visible", "hidden");
   document.getElementById("deleteAct").classList.replace("visible", "hidden");
+
+  //hide galery
+  document.getElementById("insertGal").classList.replace("visible", "hidden");
+  document.getElementById("deleteGal").classList.replace("visible", "hidden");
+
+  //hide schoolroom
+  document.getElementById("insertSchRoom").classList.replace("visible", "hidden");
+
+  //hide index
+  document.getElementById("insertIndex").classList.replace("visible", "hidden");
+  document.getElementById("indexPdf").classList.replace("visible", "hidden");
+  document.getElementById("indexWord").classList.replace("visible", "hidden");
 }
 </script>
 
@@ -58,6 +71,7 @@ function hideAll() {
   <button id="insertGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertGal')">Vložit galerii</button>
   <button id="deleteGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteGal')">Smazat galerii</button>
   <button id="insertSchRoomButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertSchRoom')">Vložit učebnu</button>
+  <button id="insertIndexButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertIndex')">Vložit hlavní text</button>
 </div>
 
 <!-- ---------------------------------- ARTICLES ---------------------------------- -->
@@ -69,12 +83,9 @@ function hideAll() {
     <div class="selection" onchange="mainSelected('insert')">
       <select id="insertMainSelect" name="insertMainSelect">
         <option value="nothing">Vyberte kategorii</option>
-        <option value="UvodniStranka">Úvodní stránka</option>
         <option value="OSkole">O Škole</option>
         <option value="ProZaky">Pro Žáky</option>
         <option value="ProRodice">Pro Rodiče</option>
-        <option value="ZakovskaKnizka">Žákovská Knížka</option>
-        <option value="Aktuality">Aktuality</option>
       </select>
     </div>
     
@@ -200,7 +211,7 @@ function hideAll() {
     <br />
     
     <div id="divGalFiles">
-      <label for="ActText">Soubory:</label>
+      <label for="files">Soubory:</label>
       <input type="file" name="files[]" id="files" multiple />
     </div>
         
@@ -248,6 +259,39 @@ function hideAll() {
   </form>
 </div>
 
-<div id="deleteGal" class="hidden">
-</div>
 
+<!-- ---------------------------------- INDEX ---------------------------------- -->
+<div id="insertIndex" class="hidden">
+  <h3> Vyplňte všechny údaje: </h3>
+  <br />
+
+  <form id="indexForm" action="upload/upload.php" method="post"  enctype="multipart/form-data">
+    <div id="divFileType" class="selection" onchange="indexFiletypeChosen()">
+      <select id="indexFileType" name="indexFileType">
+        <option value="">Vyberte typ souboru...</option>
+        <option value="pdf"> PDF</option>
+        <option value="word"> Word - web application</option>
+      </select>
+    </div>
+
+    <input type="hidden" name="insertMainSelect"  value="UvodniStranka">
+    <input type="hidden" name="insertMinorSelect"  value="UvodniStranka">
+    <input type="hidden" name="parameter_name"  value="your_custom_value">
+
+      
+    <div style="height: 10px">
+    </div>
+    
+    <div id="indexPdf" class="hidden">
+      <label for="pdfFile" class="btn">Nahrajte PDF soubor: </label>
+      <input type="file" name="pdfFile" id="pdfFile" onChange="indexShowUploadButton()" />
+    </div>
+
+    <div id="indexWord" class="hidden" >
+      <label for="folder" class="btn">Nahrajte složku: </label>
+      <input type="file" name="files[]" id="files" multiple="" directory="" webkitdirectory="" mozdirectory="" onChange="indexShowUploadButton()" />
+    </div>
+        
+    <input id="indexSubmitButtonUpload" type="submit" value="Potvrdit nahrání" class="hidden"/>
+  </form>
+</div>

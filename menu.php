@@ -15,7 +15,7 @@
       </li>
       <li><a href="services.html">PRO ŽÁKY<i class="fa fa-caret-down fa-fw" aria-hidden="true"></i></a>
         <ul class="submenu">
-          <li><a href="#" onclick="loadPageJs('ProZaky', 'SkolniRok')">Školní rok 2019/2020</a></li>
+          <li><a href="#" onclick="loadPageJs('ProZaky', 'SkolniRok')">Školní rok 2020/2021</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'PlanovaneAkce')">Plánované akce</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'BezpecnaSkola')">Bezpečná škola</a></li>
           <li><a href="#" onclick="loadPageJs('ProZaky', 'DetskyParlament')">Dětský parlament</a></li>
@@ -24,7 +24,7 @@
       </li>                       
       <li><a href="products.html">PRO RODIČE<i class="fa fa-caret-down fa-fw" aria-hidden="true"></i></a>
         <ul class="submenu">
-          <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniRok')">Školní rok 2019/2020</a></li>
+          <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniRok')">Školní rok 2020/2021</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'Informace')">Informace</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniJidelna')">Školní jídelna</a></li>
           <li><a href="#" onclick="loadPageJs('ProRodice', 'SkolniDruzina')">Školní družina</a></li>

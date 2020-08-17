@@ -22,7 +22,7 @@ foreach($files as $file) {
     $text = $text."<div class=\"row\">";
   }
   $text = $text."<div class=\"column\">
-    <img src=\"../galery/".$galeryNumber."/".$file."\" alt=\"Obrazek zde\" onclick=\"enlargeImage(this);\">
+    <img src=\"./galery/".$galeryNumber."/".$file."\" alt=\"Obrazek zde\" onclick=\"enlargeImage(this);\">
   </div>";
   if ($counter%$pictures_per_row == 0) {
     $text = $text."</div>";

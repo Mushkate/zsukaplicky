@@ -24,16 +24,17 @@ function showGallery(galery) {
   });
 }
 
-function deleteGal(id){
-  console.log("deleting galery with id " + id);
+function deleteActJS(id){
+  console.log("deleting actuality with title " + id);
   $.ajax({
     type: "POST",
-    url: "upload/deleteGal.php",
+    url: "upload/deleteExactAct.php",
     data: ({id: id}),
   }).done(function(data) {
     console.log("in done of deleteGal")
     console.log("gotten data: " + data);
     $('.tdMid').html(data);
-    location.reload();
+    console.log("refreshing the page");
+    location.reload(); 
   });
 }
