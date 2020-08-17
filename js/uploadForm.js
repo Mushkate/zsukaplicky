@@ -131,17 +131,17 @@ function setMinorFor(major, formType) {
     switch(major){
         case "OSkole":
             console.log("in o skole");
-            items = ["Dokumenty", "Vzdělávací program", "Učebny", "Organizace", "Evropské projekty", "Pedagogický sbor", "Školská rada"];
-            values = ["Dokumenty", "VzdelavaciProgram","Ucebny","Organizace", "EvropskeProjekty", "PedagogickySbor", "SkolskaRada"];
+            items = ["Dokumenty", "Vzdělávací program", "Organizace", "Evropské projekty", "Pedagogický sbor", "Školská rada"];
+            values = ["Dokumenty", "VzdelavaciProgram", "Organizace", "EvropskeProjekty", "PedagogickySbor", "SkolskaRada"];
             break;
         case "ProZaky":
             console.log("in pro zaky");
-            items = ["Školní rok 2019/2020", "Plánované Akce", "Dětský Parlament", "Školní Řád"];
+            items = ["Školní rok", "Plánované Akce", "Dětský Parlament", "Školní Řád"];
             values = ["SkolniRok", "PlanovaneAkce", "DetskyParlament", "SkolniRad"]
             break;        
         case "ProRodice":
             console.log("in pro zaky");
-            items = ["Školní rok 2019/2020", "Informace", "Školní Jídelna", "Školní Družina", "Školní Poradenské Pracoviště"];
+            items = ["Školní rok", "Informace", "Školní Jídelna", "Školní Družina", "Školní Poradenské Pracoviště"];
             values = ["SkolniRok", "Informace", "SkolniJidelna", "SkolniDruzina", "SkolniPoradenskePracoviste"]
             break;
         default:
