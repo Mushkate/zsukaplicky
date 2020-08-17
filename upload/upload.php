@@ -169,8 +169,8 @@ if ($filetype == "pdf") {
 }
 
 echo "<br><br>";
-echo "<input type='submit' value='Domů'onclick=\"window.location='../../index.php';\" />  ";
-echo "<input type='submit' value='Nahrát další článek'onclick=\"window.location='../../approve.php';\" />";
+echo "<input type='submit' value='Domů'onclick=\"window.location='../index.php';\" />  ";
+echo "<input type='submit' value='Nahrát další článek'onclick=\"window.location='../approve.php';\" />";
 
 // --- REFRESH SIGHNPOST HTML FILE
 if ( ! in_array($minor, $noSignpost)){

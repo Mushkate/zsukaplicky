@@ -55,7 +55,7 @@ window.onload=function(){
   </table>
 </a>
 </div>                               
-                                
+             
 <?php 
     include 'menu.php';  
     include 'body.php';
