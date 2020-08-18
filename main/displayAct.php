@@ -31,6 +31,9 @@ foreach ($years as $year){
                 break;
             }
         }
+        if ($actsWentThrough == $endIndex ){
+            break;
+        }
     }
     if( count($actualities) == $actPerPage ) {
         break;

@@ -21,9 +21,9 @@
 function openTab(openId) {
   hideAll();
   console.log("after hide all");
-  console.log("before getelementbyid for " + openId);
+  console.log("before getElementById for " + openId);
   document.getElementById(openId).classList.replace("hidden", "visible");
-  console.log("after getelementbyid");
+  console.log("after getElementById");
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
@@ -43,7 +43,12 @@ function hideAll() {
   //hide insert fields
   document.getElementById("insert").classList.replace("visible", "hidden");
   document.getElementById("insertMainSelect").value="nothing";
-  //minorSelected_hideAll("insert");
+  document.getElementById("insertDivMinor").classList.replace("visible","hidden");
+  document.getElementById("divTitle").classList.replace("visible","hidden");
+  document.getElementById("divFileType").classList.replace("visible","hidden");
+  document.getElementById("pdf").classList.replace("visible","hidden");
+  document.getElementById("word").classList.replace("visible","hidden");
+  document.getElementById("submitButtonUpload").classList.replace("visible","hidden");
 
   //hide insertAct fields
   document.getElementById("insertAct").classList.replace("visible", "hidden");
