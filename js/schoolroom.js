@@ -23,3 +23,17 @@ function showSchoolroom(galery) {
     $('.tdMid').html(data);
   });
 }
+
+function deleteSchRoom(id){
+  console.log("deleting schoolroom with id " + id);
+  $.ajax({
+    type: "POST",
+    url: "upload/deleteSchRoom.php",
+    data: ({id: id}),
+  }).done(function(data) {
+    console.log("in done of deleteSchRoom")
+    console.log("gotten data: " + data);
+    $('.tdMid').html(data);
+    location.reload();
+  });
+}

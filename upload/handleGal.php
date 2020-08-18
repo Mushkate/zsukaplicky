@@ -8,7 +8,7 @@ function getGaleries(){
     while (!feof($handle)) {
         $line=fgets($handle);
         $pieces = explode("_", $line);
-        $text = $text."<tr><td>".$pieces[1]."</td><td><button onclick=\"deleteGal('".$pieces[0]."')\">Odstranit</button></td></tr>";
+        $text = $text."<tr><td>".$pieces[1]."</td><td><button onclick=\"deleteGal('".$pieces[0]."')\">Odstranit</button></td></tr>"; // in galery.js
     }
     fclose($handle);
     $text = $text."</table>";

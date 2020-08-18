@@ -5,7 +5,7 @@
 
 <script src="js/galery.js" type="text/javascript"></script>
 <script src="js/act.js" type="text/javascript"></script>
-              
+<script src="js/schoolroom.js" type="text/javascript"></script>
 
 <div class="header" id="header">
   <table class="headerTable">
@@ -60,6 +60,7 @@ function hideAll() {
 
   //hide schoolroom
   document.getElementById("insertSchRoom").classList.replace("visible", "hidden");
+  document.getElementById("deleteSchRoom").classList.replace("visible", "hidden");
 
   //hide index
   document.getElementById("insertIndex").classList.replace("visible", "hidden");
@@ -76,6 +77,7 @@ function hideAll() {
   <button id="insertGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertGal')">Vložit galerii</button>
   <button id="deleteGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteGal')">Smazat galerii</button>
   <button id="insertSchRoomButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertSchRoom')">Vložit učebnu</button>
+  <button id="deleteGalButton" class="tablinks w3-bar-item w3-button" onclick="openTab('deleteSchRoom')">Smazat učebnu</button>
   <button id="insertIndexButton" class="tablinks w3-bar-item w3-button" onclick="openTab('insertIndex')">Vložit hlavní text</button>
 </div>
 
@@ -263,6 +265,19 @@ function hideAll() {
     <input id="submitButtonUpload" type="submit" value="Potvrdit nahrání" />
   </form>
 </div>
+
+<div id="deleteSchRoom" class="hidden">
+  <h3> Seznam učeben: </h3>
+  <br />
+
+  <div id="divSchRoomTitles" >
+    <?php
+      include("upload/handleSchRoom.php");
+      getSchRooms();
+    ?>
+  </div>
+</div>
+
 
 
 <!-- ---------------------------------- INDEX ---------------------------------- -->
